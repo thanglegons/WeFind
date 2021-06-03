@@ -8,6 +8,7 @@ from common.edge import Edge
 from common.node import Node
 from common.respond import Respond
 from services.distance_getter import DistanceGetter
+from services.foody_clawer import Crawler
 from services.location_searcher import LocationSearcher
 
 import numpy as np
@@ -33,6 +34,13 @@ def routing():
     respond = transform(points, coordinates, distances, routes)
     print(to_dict(respond))
     return to_dict(respond)
+
+
+@app.route('/crawl')
+def crawl():
+    crawler = Crawler()
+    crawler.crawl()
+    return '200'
 
 
 def to_dict(obj):

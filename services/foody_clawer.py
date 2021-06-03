@@ -39,7 +39,7 @@ class Crawler:
                     lat = item['Latitude']
                     long = item['Longitude']
                     print(name, address, lat, long)
-                    es.index(
+                    res = es.index(
                         index=ES_INDEX,
                         doc_type=ES_DOC,
                         id=uuid.uuid4(),
@@ -50,3 +50,4 @@ class Crawler:
                             'long': long
                         }
                     )
+                    print(res)
