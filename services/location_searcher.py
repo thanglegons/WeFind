@@ -6,7 +6,7 @@ import config
 from database import redis_cache
 
 from common.coordinates import Coordinates
-from database.eswh import es
+from database.eswh import es, ES_INDEX
 
 
 class Strategy:
@@ -24,12 +24,12 @@ class RedisCacheStrategy(Strategy):
 class ESStrategy(Strategy):
 
     def get_result(self, text):
-        res = es.search(index='test', body={
+        res = es.search(index=ES_INDEX, body={
             'query': {
                 'multi_match': {
                     'query': text,
                     'fields': ["name", "address"],
-                    "minimum_should_match": "98%"
+                    "minimum_should_match": "90%"
                 }
             }
         })
